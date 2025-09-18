@@ -9,8 +9,7 @@ public static class G
     
     //Объекты в игре
     public static GameMain Main;
-    public static TempleGameMain Adv_Main1;
-
+    public static GenericCamera Camera;
 }
 
 [DefaultExecutionOrder(-9999)]
@@ -35,6 +34,13 @@ public static class GameBootstrapper
         G.LocSystem = CreateSimpleService<LocSystem>();
         G.SceneLoader = CreateSimpleService<SceneLoader>();
         G.GameState = CreateSimpleService<GameState>();
+        
+        G.SceneLoader.onLoadAction = () =>
+        {
+           
+            G.Main = Object.FindFirstObjectByType<GameMain>();
+            G.Camera = Object.FindFirstObjectByType<GenericCamera>();
+        };
     }
     private static T CreateSimpleService<T>() where T : Component, IService
     {
