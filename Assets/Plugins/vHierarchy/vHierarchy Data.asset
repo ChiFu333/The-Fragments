@@ -16,6 +16,7 @@ MonoBehaviour:
     keys:
     - 8c9cfa26abfee488c85f1582747f6a02
     - 02b3b7a30ab9a894f9d3fccdf4cce01e
+    - 12f9c5cdf1f85594aabf7ef331ef7c7b
     values:
     - goDatas_byGlobalId:
         keys:
@@ -26,6 +27,9 @@ MonoBehaviour:
         - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-838876992-0
         - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-837713170-0
         - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-1051130212-0
+        - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-1988984486-0
+        - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-1266047190-0
+        - globalObjectIdString: GlobalObjectId_V1-2-8c9cfa26abfee488c85f1582747f6a02-1353284130-0
         values:
         - colorIndex: 0
           iconNameOrGuid: Favorite
@@ -41,9 +45,36 @@ MonoBehaviour:
           iconNameOrGuid: Folder Icon
         - colorIndex: 0
           iconNameOrGuid: StandaloneInputModule Icon
+        - colorIndex: 0
+          iconNameOrGuid: PreMatQuad
+        - colorIndex: 0
+          iconNameOrGuid: StandaloneInputModule Icon
+        - colorIndex: 0
+          iconNameOrGuid: Terrain Icon
     - goDatas_byGlobalId:
         keys:
         - globalObjectIdString: GlobalObjectId_V1-1-02b3b7a30ab9a894f9d3fccdf4cce01e-3795314131446334058-0
         values:
         - colorIndex: 0
           iconNameOrGuid: Camera Icon
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-1564133972-0
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-619394800-0
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-737215918-0
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-1684358188-0
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-1051130212-0
+        - globalObjectIdString: GlobalObjectId_V1-2-12f9c5cdf1f85594aabf7ef331ef7c7b-452399479-0
+        values:
+        - colorIndex: 8
+          iconNameOrGuid: Folder Icon
+        - colorIndex: 0
+          iconNameOrGuid: Light Icon
+        - colorIndex: 0
+          iconNameOrGuid: Terrain Icon
+        - colorIndex: 7
+          iconNameOrGuid: 
+        - colorIndex: 0
+          iconNameOrGuid: StandaloneInputModule Icon
+        - colorIndex: 2
+          iconNameOrGuid: AvatarMask On Icon

@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 115.615, y: -44.66}
-  m_SizeDelta: {x: 151.23, y: 59.32}
+  m_AnchoredPosition: {x: 148.84, y: -44.66}
+  m_SizeDelta: {x: 217.68, y: 59.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &932250144626218440
 CanvasRenderer:
@@ -111,10 +111,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u043E\u0440\u043C?"
+  m_text: "\u0442\u0443\u0442 \u0442\u0435\u043A\u0441\u0442"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 45d8cd9edc7e38c4a8e915ca5df7197e, type: 2}
-  m_sharedMaterial: {fileID: -3391682594145091961, guid: 45d8cd9edc7e38c4a8e915ca5df7197e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7e4295649d1db3d4b93f80d9f6f1ae17, type: 2}
+  m_sharedMaterial: {fileID: -2448610470816216062, guid: 7e4295649d1db3d4b93f80d9f6f1ae17, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

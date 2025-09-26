@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Runtime;
 using UnityEngine;
 
 public class CMSEntityPfb : MonoBehaviour
@@ -33,6 +32,8 @@ public class CMSEntityPfb : MonoBehaviour
             {
                 case TagSprite tagSprite when tagSprite.sprite != null:
                     return tagSprite.sprite;
+                case TagAnimationData tagAnimData when tagAnimData.frames != null && tagAnimData.frames.Count > 0:
+                    return tagAnimData.frames[0];
             }
         }
         

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Runtime
+[Serializable]
+public class TagSprite : EntityComponentDefinition
 {
-    [Serializable]
-    public class TagSprite : EntityComponentDefinition
-    {
-        public Sprite sprite;
-    }
+    public Sprite sprite;
+}
+[Serializable]
+public class TagAnimationData : EntityComponentDefinition {
+    [field: SerializeField] public float framerate { get; private set; }
+    [field: SerializeField] public Vector2 animationOffset { get; private set; }
+    [field: SerializeField] public List<Sprite> frames { get; private set; } = new List<Sprite>();
 }

@@ -10,7 +10,6 @@ using System.Linq;
 public class SceneLoader : MonoBehaviour, IService
 {
     public string currentSceneName = null;
-    public Action onLoadAction;
     
     private GameObject _fadeCanvas;
     private bool showFade;
@@ -21,7 +20,6 @@ public class SceneLoader : MonoBehaviour, IService
             CreateFadeCanvas();
         
         currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.sceneLoaded += (scene, sceneMode) => onLoadAction?.Invoke();
         _ = Unfade(0.75f);
     }
     public async UniTask Load(string n, float fadeSpeed = 0.75f)

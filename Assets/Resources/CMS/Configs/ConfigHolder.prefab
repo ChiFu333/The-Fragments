@@ -55,8 +55,8 @@ MonoBehaviour:
       type: {class: ConfigMain, ns: , asm: Assembly-CSharp}
       data:
         showFading: 1
-        showLocOnStart: 1
-        rewriteLocWithRus: 0
+        showLocOnStart: 0
+        rewriteLocWithRus: 1
     - rid: 4770333508773347396
       type: {class: ConfigGameStates, ns: , asm: Assembly-CSharp}
       data:
