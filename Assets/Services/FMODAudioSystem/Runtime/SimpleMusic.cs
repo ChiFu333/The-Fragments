@@ -12,9 +12,9 @@ namespace Services.FMODAudioSystem
         
         private void Start()
         {
-            G.FmodFMODAudio.Preload(_event);
+            G.FMODAudioManager.Preload(_event);
             Debug.Log("Trying to play: " + _event + "");
-            G.FmodFMODAudio.Play(_event);
+            G.FMODAudioManager.Play(_event);
             Debug.Log("Done");
         }
     }

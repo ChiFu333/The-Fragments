@@ -37,86 +37,86 @@
 
 ## Базовые примеры использования
 
-Все примеры ниже используют `G.FmodFMODAudio` (сервис, созданный при запуске).
+Все примеры ниже используют `G.FMODAudioManager` (сервис, созданный при запуске).
 
 - Воспроизвести одноразовый звук в мировой позиции:
 ```csharp
-G.FmodFMODAudio.PlayOneShot(mySfxEvent, transform.position);
+G.FMODAudioManager.PlayOneShot(mySfxEvent, transform.position);
 ```
 
 - Воспроизвести одноразовый звук с кулдауном (чтобы не засорять):
 ```csharp
-bool played = G.FmodFMODAudio.PlayOneShotWithCooldown(mySfxEvent, transform.position, 0.1f);
+bool played = G.FMODAudioManager.PlayOneShotWithCooldown(mySfxEvent, transform.position, 0.1f);
 ```
 
 - Прикреплённый звук (следует за объектом):
 ```csharp
-G.FmodFMODAudio.PlayOneShotAttached(mySfxEvent, gameObject);
-var loop = G.FmodFMODAudio.PlayAttached(myLoopEvent, transform);
+G.FMODAudioManager.PlayOneShotAttached(mySfxEvent, gameObject);
+var loop = G.FMODAudioManager.PlayAttached(myLoopEvent, transform);
 ```
 
 - Музыка с кроссфейдом:
 ```csharp
-G.FmodFMODAudio.PlayMusic(myMusicEvent, fadeSeconds: 0.75f);
+G.FMODAudioManager.PlayMusic(myMusicEvent, fadeSeconds: 0.75f);
 ```
 
 - Плейлист музыки:
 ```csharp
-G.FmodFMODAudio.StartMusicPlaylist(new List<EventReference>{ track1, track2 }, loop: true, crossfadeSeconds: 0.5f);
-G.FmodFMODAudio.NextTrack();
-G.FmodFMODAudio.StopMusicPlaylist();
+G.FMODAudioManager.StartMusicPlaylist(new List<EventReference>{ track1, track2 }, loop: true, crossfadeSeconds: 0.5f);
+G.FMODAudioManager.NextTrack();
+G.FMODAudioManager.StopMusicPlaylist();
 ```
 
 - Глобальные и локальные параметры:
 ```csharp
 // Глобальный
-await G.FmodFMODAudio.RampGlobalParameter("Tension", 1f, 0.5f);
+await G.FMODAudioManager.RampGlobalParameter("Tension", 1f, 0.5f);
 
 // Параметр конкретного события
-await G.FmodFMODAudio.RampParameter(myMusicEvent, "Intensity", 0.8f, 1.0f);
+await G.FMODAudioManager.RampParameter(myMusicEvent, "Intensity", 0.8f, 1.0f);
 ```
 
 - Шины (Bus): громкость, плавное изменение, дакинг:
 ```csharp
-G.FmodFMODAudio.SetBusVolume("bus:/Music", 0.65f, persist: true);
-await G.FmodFMODAudio.FadeBusVolume("bus:/SFX", 0.4f, 0.7f);
-await G.FmodFMODAudio.DuckBus("bus:/Music", 0.25f, 0.1f, 1.0f, 0.3f);
+G.FMODAudioManager.SetBusVolume("bus:/Music", 0.65f, persist: true);
+await G.FMODAudioManager.FadeBusVolume("bus:/SFX", 0.4f, 0.7f);
+await G.FMODAudioManager.DuckBus("bus:/Music", 0.25f, 0.1f, 1.0f, 0.3f);
 ```
 
 - Снапшоты:
 ```csharp
-var snap = G.FmodFMODAudio.StartSnapshot(mySnapshot);
-G.FmodFMODAudio.StopSnapshot(mySnapshot);
+var snap = G.FMODAudioManager.StartSnapshot(mySnapshot);
+G.FMODAudioManager.StopSnapshot(mySnapshot);
 
-await G.FmodFMODAudio.PushSnapshotAsync(mySnapshot);
-await G.FmodFMODAudio.PopSnapshotAsync();
+await G.FMODAudioManager.PushSnapshotAsync(mySnapshot);
+await G.FMODAudioManager.PopSnapshotAsync();
 ```
 
 - Динамическая загрузка/выгрузка событий:
 ```csharp
-G.FmodFMODAudio.Preload(myEvent);
-bool loaded = G.FmodFMODAudio.IsLoaded(myEvent);
-G.FmodFMODAudio.Unload(myEvent);
+G.FMODAudioManager.Preload(myEvent);
+bool loaded = G.FMODAudioManager.IsLoaded(myEvent);
+G.FMODAudioManager.Unload(myEvent);
 ```
 
 - Лимиты конкуренции (чтобы не плодить копии лупов):
 ```csharp
-if (G.FmodFMODAudio.PlayIfUnderLimit(myLoopEvent, maxSimultaneous: 2)) {
+if (G.FMODAudioManager.PlayIfUnderLimit(myLoopEvent, maxSimultaneous: 2)) {
     // Запустили ещё один экземпляр
 }
 ```
 
 - Теги событий (групповые операции):
 ```csharp
-G.FmodFMODAudio.RegisterTag(myEvent, "footsteps");
-G.FmodFMODAudio.StopByTag("footsteps");
+G.FMODAudioManager.RegisterTag(myEvent, "footsteps");
+G.FMODAudioManager.StopByTag("footsteps");
 ```
 
 ## Управление банками
 
 ```csharp
-await G.FmodFMODAudio.LoadBanksAsync(new[]{ "Master", "SFX", "Music" }, loadSampleData: true);
-G.FmodFMODAudio.UnloadBank("SFX");
+await G.FMODAudioManager.LoadBanksAsync(new[]{ "Master", "SFX", "Music" }, loadSampleData: true);
+G.FMODAudioManager.UnloadBank("SFX");
 ```
 
 ## UI: слайдер громкости шины
@@ -182,7 +182,7 @@ G.FmodFMODAudio.UnloadBank("SFX");
 
 ## Как всё это связывается в проекте
 
-- Вы обращаетесь к менеджеру `FMODAudioManager` через `G.FmodFMODAudio`.
+- Вы обращаетесь к менеджеру `FMODAudioManager` через `G.FMODAudioManager`.
 - Для эффектов используйте одноразовые звуки (`PlayOneShot`) или лупы (`PlayAttached`/`PlayIfUnderLimit`).
 - Для громкости используйте шины (`FindBus`, `SetBusVolume`, `FadeBusVolume`, `DuckBus`).
 - Для ситуационных изменений микса — снапшоты (`StartSnapshot`, `StopSnapshot`, стек снапшотов).
@@ -195,19 +195,19 @@ G.FmodFMODAudio.UnloadBank("SFX");
   - Подвяжите `FMODBusVolumeSlider` к `bus:/Music` и `bus:/SFX`. Слайдеры будут читать/писать громкость и сохранять её в PlayerPrefs (если `Persist = true`).
 
 - __Автоматический дакинг речи поверх музыки.__
-  - При старте речи: `await G.FmodFMODAudio.DuckBus("bus:/Music", 0.25f, 0.1f, hold:1.5f, release:0.3f)`.
-  - Или с IDisposable-хэндлом: `using (G.FmodFMODAudio.BeginDuck(...)) { ... }` — восстановится автоматически при Dispose.
+  - При старте речи: `await G.FMODAudioManager.DuckBus("bus:/Music", 0.25f, 0.1f, hold:1.5f, release:0.3f)`.
+  - Или с IDisposable-хэндлом: `using (G.FMODAudioManager.BeginDuck(...)) { ... }` — восстановится автоматически при Dispose.
 
 - __Пауза игры (тихий микс + фильтр).__
-  - `var snap = pauseSnapshotRef; G.FmodFMODAudio.StartSnapshot(snap);` при паузе.
-  - `G.FmodFMODAudio.StopSnapshot(snap);` при резюме. Либо используйте стек (`PushSnapshotAsync`/`PopSnapshotAsync`).
+  - `var snap = pauseSnapshotRef; G.FMODAudioManager.StartSnapshot(snap);` при паузе.
+  - `G.FMODAudioManager.StopSnapshot(snap);` при резюме. Либо используйте стек (`PushSnapshotAsync`/`PopSnapshotAsync`).
 
 - __Адаптивная музыка.__
   - Глобальный параметр `Intensity` растёт в бою: `await RampGlobalParameter("Intensity", 1, 0.5f)` и постепенно снижается после боя.
 
 - __Разные музыкальные плейлисты для сцен/биомов.__
   - Создайте несколько `FMODEventSequence` (например, "Forest", "Dungeon"). 
-  - В сцене запускайте нужный актив: `G.FmodFMODAudio.StartMusicPlaylist(forestSequence)`.
+  - В сцене запускайте нужный актив: `G.FMODAudioManager.StartMusicPlaylist(forestSequence)`.
 
 ## Рекомендации и лучшие практики
 

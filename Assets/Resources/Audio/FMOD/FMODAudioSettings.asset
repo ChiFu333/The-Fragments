@@ -24,12 +24,6 @@ MonoBehaviour:
   - Path: bus:/Ambience
     DefaultVolume: 1
     PlayerPrefsKey: audio_fmod_bus_volume_ambience
-  PreloadEvents:
-  - Name: Click
-    Reference:
-      Guid:
-        Data1: -625326496
-        Data2: 1092249427
-        Data3: 1299351710
-        Data4: 648985877
-      Path: event:/Click
+  PreloadEvents: []
+  MaxCachedEvents: 0
+  StopAllOnSceneChange: 1

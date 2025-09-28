@@ -89,95 +89,95 @@ namespace Services.FMODAudioSystem
 
         // --- One-shots ---
         /// <summary>Воспроизвести одноразовый звук в позиции <see cref="OneShotWorldPos"/>.</summary>
-        public void PlayOneShot() => G.FmodFMODAudio.PlayOneShot(OneShot, OneShotWorldPos);
+        public void PlayOneShot() => G.FMODAudioManager.PlayOneShot(OneShot, OneShotWorldPos);
         /// <summary>Воспроизвести одноразовый звук, привязанный к <see cref="AttachTarget"/> или к собственному Transform.</summary>
         public void PlayOneShotAttached()
         {
             var target = AttachTarget == null ? transform : AttachTarget;
-            G.FmodFMODAudio.PlayOneShotAttached(OneShot, target.gameObject);
+            G.FMODAudioManager.PlayOneShotAttached(OneShot, target.gameObject);
         }
         /// <summary>Воспроизвести одноразовый звук с кулдауном.</summary>
-        public void PlayOneShotWithCooldown() => G.FmodFMODAudio.PlayOneShotWithCooldown(OneShot, OneShotWorldPos, OneShotCooldown);
+        public void PlayOneShotWithCooldown() => G.FMODAudioManager.PlayOneShotWithCooldown(OneShot, OneShotWorldPos, OneShotCooldown);
 
         // --- Looping ---
         /// <summary>Запустить зацикленное событие, привязав к цели (или к собственному Transform).</summary>
-        public void PlayLoop() => _attachedLoopInstance = G.FmodFMODAudio.PlayAttached(LoopingEvent, AttachTarget == null ? transform : AttachTarget);
+        public void PlayLoop() => _attachedLoopInstance = G.FMODAudioManager.PlayAttached(LoopingEvent, AttachTarget == null ? transform : AttachTarget);
         /// <summary>Остановить луп.</summary>
-        public void StopLoop() => G.FmodFMODAudio.Stop(LoopingEvent);
+        public void StopLoop() => G.FMODAudioManager.Stop(LoopingEvent);
         /// <summary>Воспроизвести луп, если не превышен лимит одновременных экземпляров.</summary>
-        public void PlayIfUnderLimit() => G.FmodFMODAudio.PlayIfUnderLimit(LoopingEvent, MaxSimultaneousForLoopingEvent);
+        public void PlayIfUnderLimit() => G.FMODAudioManager.PlayIfUnderLimit(LoopingEvent, MaxSimultaneousForLoopingEvent);
 
         // --- Dynamic load ---
         /// <summary>Предзагрузить событие лупа.</summary>
-        public void Preload() => G.FmodFMODAudio.Preload(LoopingEvent);
+        public void Preload() => G.FMODAudioManager.Preload(LoopingEvent);
         /// <summary>Выгрузить событие лупа.</summary>
-        public void Unload() => G.FmodFMODAudio.Unload(LoopingEvent);
+        public void Unload() => G.FMODAudioManager.Unload(LoopingEvent);
         /// <summary>Убедиться, что событие лупа загружено.</summary>
-        public void EnsureLoaded() => G.FmodFMODAudio.EnsureLoaded(LoopingEvent);
+        public void EnsureLoaded() => G.FMODAudioManager.EnsureLoaded(LoopingEvent);
 
         // --- Music ---
         /// <summary>Воспроизвести музыкальный трек с кроссфейдом.</summary>
-        public void PlayMusic() => G.FmodFMODAudio.PlayMusic(MusicEvent, MusicCrossfade);
+        public void PlayMusic() => G.FMODAudioManager.PlayMusic(MusicEvent, MusicCrossfade);
         /// <summary>Запустить плейлист.</summary>
-        public void StartPlaylist() => G.FmodFMODAudio.StartMusicPlaylist(Playlist, true, MusicCrossfade);
+        public void StartPlaylist() => G.FMODAudioManager.StartMusicPlaylist(Playlist, true, MusicCrossfade);
         /// <summary>Остановить плейлист.</summary>
-        public void StopPlaylist() => G.FmodFMODAudio.StopMusicPlaylist();
+        public void StopPlaylist() => G.FMODAudioManager.StopMusicPlaylist();
         /// <summary>Следующий трек плейлиста.</summary>
-        public void NextTrack() => G.FmodFMODAudio.NextTrack(MusicCrossfade);
+        public void NextTrack() => G.FMODAudioManager.NextTrack(MusicCrossfade);
         /// <summary>Предыдущий трек плейлиста.</summary>
-        public void PreviousTrack() => G.FmodFMODAudio.PreviousTrack(MusicCrossfade);
+        public void PreviousTrack() => G.FMODAudioManager.PreviousTrack(MusicCrossfade);
 
         /// <summary>Запустить плейлист из актива <see cref="PlaylistAsset"/>.</summary>
         public void StartPlaylistAsset()
         {
             if (PlaylistAsset != null)
-                G.FmodFMODAudio.StartMusicPlaylist(PlaylistAsset, MusicCrossfade);
+                G.FMODAudioManager.StartMusicPlaylist(PlaylistAsset, MusicCrossfade);
         }
 
         // --- Snapshots ---
         /// <summary>Запустить снапшот.</summary>
-        public void StartSnapshot() => G.FmodFMODAudio.StartSnapshot(Snapshot);
+        public void StartSnapshot() => G.FMODAudioManager.StartSnapshot(Snapshot);
         /// <summary>Остановить снапшот.</summary>
-        public void StopSnapshot() => G.FmodFMODAudio.StopSnapshot(Snapshot);
+        public void StopSnapshot() => G.FMODAudioManager.StopSnapshot(Snapshot);
         /// <summary>Положить снапшот на стек приоритетов.</summary>
-        public async UniTask PushSnapshotAsync() => await G.FmodFMODAudio.PushSnapshotAsync(Snapshot, 0.25f);
+        public async UniTask PushSnapshotAsync() => await G.FMODAudioManager.PushSnapshotAsync(Snapshot, 0.25f);
         /// <summary>Снять снапшот со стека.</summary>
-        public async UniTask PopSnapshotAsync() => await G.FmodFMODAudio.PopSnapshotAsync(0.25f);
+        public async UniTask PopSnapshotAsync() => await G.FMODAudioManager.PopSnapshotAsync(0.25f);
 
         // --- Parameters ---
         /// <summary>Плавно изменить глобальный параметр.</summary>
-        public async UniTask RampGlobalParameter() => await G.FmodFMODAudio.RampGlobalParameter(GlobalParameterName, GlobalParameterTarget, GlobalParameterDuration);
+        public async UniTask RampGlobalParameter() => await G.FMODAudioManager.RampGlobalParameter(GlobalParameterName, GlobalParameterTarget, GlobalParameterDuration);
         /// <summary>Плавно изменить параметр события.</summary>
-        public async UniTask RampEventParameter() => await G.FmodFMODAudio.RampParameter(LoopingEvent, EventParameterName, EventParameterTarget, EventParameterDuration);
+        public async UniTask RampEventParameter() => await G.FMODAudioManager.RampParameter(LoopingEvent, EventParameterName, EventParameterTarget, EventParameterDuration);
 
         // --- Buses ---
         /// <summary>Установить громкость шины и сохранить её.</summary>
-        public void SetBusVolume() => G.FmodFMODAudio.SetBusVolume(BusPath, BusVolume, true);
+        public void SetBusVolume() => G.FMODAudioManager.SetBusVolume(BusPath, BusVolume, true);
         /// <summary>Плавно изменить громкость шины.</summary>
-        public async UniTask FadeBus() => await G.FmodFMODAudio.FadeBusVolume(BusPath, BusVolume, BusFadeSeconds);
+        public async UniTask FadeBus() => await G.FMODAudioManager.FadeBusVolume(BusPath, BusVolume, BusFadeSeconds);
         /// <summary>Выполнить дакинг шины.</summary>
-        public async UniTask DuckBus() => await G.FmodFMODAudio.DuckBus(BusPath, DuckToVolume, DuckAttack, DuckHold, DuckRelease);
+        public async UniTask DuckBus() => await G.FMODAudioManager.DuckBus(BusPath, DuckToVolume, DuckAttack, DuckHold, DuckRelease);
 
         // --- Control ---
         /// <summary>Остановить все события.</summary>
-        public void StopAll() => G.FmodFMODAudio.StopAll();
+        public void StopAll() => G.FMODAudioManager.StopAll();
         /// <summary>Поставить паузу всем событиям.</summary>
-        public void PauseAll() => G.FmodFMODAudio.SetPausedAll(true);
+        public void PauseAll() => G.FMODAudioManager.SetPausedAll(true);
         /// <summary>Снять паузу со всех событий.</summary>
-        public void ResumeAll() => G.FmodFMODAudio.SetPausedAll(false);
+        public void ResumeAll() => G.FMODAudioManager.SetPausedAll(false);
 
         // --- Banks ---
         /// <summary>Загрузить указанные банки FMOD.</summary>
-        public async UniTask LoadBanksAsync() => await G.FmodFMODAudio.LoadBanksAsync(BanksToLoad, true);
+        public async UniTask LoadBanksAsync() => await G.FMODAudioManager.LoadBanksAsync(BanksToLoad, true);
         /// <summary>Выгрузить банк FMOD по имени.</summary>
-        public void UnloadBank() { if (!string.IsNullOrEmpty(BankToUnload)) G.FmodFMODAudio.UnloadBank(BankToUnload); }
+        public void UnloadBank() { if (!string.IsNullOrEmpty(BankToUnload)) G.FMODAudioManager.UnloadBank(BankToUnload); }
 
         // --- Tags ---
         /// <summary>Присвоить лупу тег <see cref="TagName"/>.</summary>
-        public void RegisterLoopTag() => G.FmodFMODAudio.RegisterTag(LoopingEvent, TagName);
+        public void RegisterLoopTag() => G.FMODAudioManager.RegisterTag(LoopingEvent, TagName);
         /// <summary>Снять тег с лупа.</summary>
-        public void UnregisterLoopTag() => G.FmodFMODAudio.UnregisterTag(LoopingEvent, TagName);
+        public void UnregisterLoopTag() => G.FMODAudioManager.UnregisterTag(LoopingEvent, TagName);
         /// <summary>Остановить все события с тегом <see cref="TagName"/>.</summary>
-        public void StopByTag() => G.FmodFMODAudio.StopByTag(TagName);
+        public void StopByTag() => G.FMODAudioManager.StopByTag(TagName);
     }
 }
