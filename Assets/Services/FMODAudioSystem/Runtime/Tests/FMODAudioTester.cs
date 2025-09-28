@@ -15,36 +15,36 @@ namespace Services.FMODAudioSystem
     [AddComponentMenu("Audio/FMOD/FMOD Audio Tester")]
     public class FMODAudioTester : MonoBehaviour
     {
-        [Header("One Shot / Looping Events")] 
         /// <summary>Событие для одноразового воспроизведения.</summary>
+        [Header("One Shot / Looping Events")] 
         public EventReference OneShot;
         /// <summary>Событие для зацикленного воспроизведения (attach).</summary>
         public EventReference LoopingEvent;
-        /// <summary>Цель для привязки звука (если не задано — используется Transform компонента).</summary>
-        public Transform AttachTarget;
+        /// <summary>Цель для привязки звука (если не задано — используется GameObject компонента).</summary>
+        public GameObject AttachTarget;
         /// <summary>Позиция для одноразового звука в мировых координатах.</summary>
         public Vector3 OneShotWorldPos = Vector3.zero;
         /// <summary>Кулдаун для одноразового звука (в секундах).</summary>
         [Min(0f)] public float OneShotCooldown = 0.1f;
 
-        [Header("Music / Playlist")]
         /// <summary>Музыкальное событие для одиночного воспроизведения.</summary>
+        [Header("Music / Playlist")]
         public EventReference MusicEvent;
         /// <summary>Список музыкальных треков для плейлиста.</summary>
         public List<EventReference> Playlist = new();
         /// <summary>Длительность кроссфейда музыки.</summary>
         [Min(0f)] public float MusicCrossfade = 0.5f;
 
-        [Header("Playlist Assets")]
         /// <summary>Плейлист как ScriptableObject-актив.</summary>
-        public FMODEventSequence PlaylistAsset;
+        [Header("Playlist Assets")]
+        public FMODEventSequenceAsset PlaylistAsset;
 
-        [Header("Snapshots")]
         /// <summary>Снапшот для проверки.</summary>
+        [Header("Snapshots")]
         public EventReference Snapshot;
 
-        [Header("Parameters")]
         /// <summary>Имя глобального параметра FMOD.</summary>
+        [Header("Parameters")]
         public string GlobalParameterName = "";
         /// <summary>Целевое значение глобального параметра.</summary>
         public float GlobalParameterTarget = 1f;
@@ -57,8 +57,8 @@ namespace Services.FMODAudioSystem
         /// <summary>Длительность изменения параметра события.</summary>
         public float EventParameterDuration = 0.5f;
 
-        [Header("Buses / Ducking")]
         /// <summary>Путь к шине.</summary>
+        [Header("Buses / Ducking")]
         public string BusPath = "bus:/";
         /// <summary>Целевая громкость шины для Set/Fade.</summary>
         [Range(0f, 1f)] public float BusVolume = 1f;
@@ -73,14 +73,14 @@ namespace Services.FMODAudioSystem
         /// <summary>Длительность плавного изменения громкости шины.</summary>
         [Min(0f)] public float BusFadeSeconds = 0.5f;
 
-        [Header("Bank Management")] 
         /// <summary>Список банков для загрузки.</summary>
+        [Header("Bank Management")] 
         public List<string> BanksToLoad = new();
         /// <summary>Имя банка для выгрузки.</summary>
         public string BankToUnload = "";
 
-        [Header("Tags / Limits")] 
         /// <summary>Имя тега для групповых операций.</summary>
+        [Header("Tags / Limits")] 
         public string TagName = "group";
         /// <summary>Максимальное число одновременных экземпляров лупа.</summary>
         [Min(1)] public int MaxSimultaneousForLoopingEvent = 2;
@@ -90,18 +90,18 @@ namespace Services.FMODAudioSystem
         // --- One-shots ---
         /// <summary>Воспроизвести одноразовый звук в позиции <see cref="OneShotWorldPos"/>.</summary>
         public void PlayOneShot() => G.FMODAudioManager.PlayOneShot(OneShot, OneShotWorldPos);
-        /// <summary>Воспроизвести одноразовый звук, привязанный к <see cref="AttachTarget"/> или к собственному Transform.</summary>
+        /// <summary>Воспроизвести одноразовый звук, привязанный к <see cref="AttachTarget"/> или к собственному GameObject.</summary>
         public void PlayOneShotAttached()
         {
-            var target = AttachTarget == null ? transform : AttachTarget;
+            var target = AttachTarget == null ? gameObject : AttachTarget;
             G.FMODAudioManager.PlayOneShotAttached(OneShot, target.gameObject);
         }
         /// <summary>Воспроизвести одноразовый звук с кулдауном.</summary>
         public void PlayOneShotWithCooldown() => G.FMODAudioManager.PlayOneShotWithCooldown(OneShot, OneShotWorldPos, OneShotCooldown);
 
         // --- Looping ---
-        /// <summary>Запустить зацикленное событие, привязав к цели (или к собственному Transform).</summary>
-        public void PlayLoop() => _attachedLoopInstance = G.FMODAudioManager.PlayAttached(LoopingEvent, AttachTarget == null ? transform : AttachTarget);
+        /// <summary>Запустить зацикленное событие, привязав к цели (или к собственному GameObject).</summary>
+        public void PlayLoop() => _attachedLoopInstance = G.FMODAudioManager.PlayAttached(LoopingEvent, AttachTarget == null ? gameObject : AttachTarget);
         /// <summary>Остановить луп.</summary>
         public void StopLoop() => G.FMODAudioManager.Stop(LoopingEvent);
         /// <summary>Воспроизвести луп, если не превышен лимит одновременных экземпляров.</summary>
@@ -131,7 +131,10 @@ namespace Services.FMODAudioSystem
         public void StartPlaylistAsset()
         {
             if (PlaylistAsset != null)
-                G.FMODAudioManager.StartMusicPlaylist(PlaylistAsset, MusicCrossfade);
+            {
+                var runtime = PlaylistAsset.BuildRuntime();
+                G.FMODAudioManager.StartMusicPlaylist(runtime, MusicCrossfade);
+            }
         }
 
         // --- Snapshots ---

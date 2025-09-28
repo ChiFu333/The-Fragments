@@ -14,7 +14,7 @@ namespace Services.FMODAudioSystem
     {
         [SerializeField]
         [Tooltip("The full path to the FMOD Bus (e.g., bus:/SFX/Player)")]
-        private string busPath = "bus:/"; // Default to master bus path
+        private string busPath = "bus:/"; // Дефолтный путь к мастер-шине
 
         private Bus busInstance;
         private bool isInitialized = false;

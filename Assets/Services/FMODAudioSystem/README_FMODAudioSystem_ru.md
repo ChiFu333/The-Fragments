@@ -4,16 +4,30 @@
 
 Основные файлы:
 - Runtime
-  - `Runtime/FMODAudioManager.cs` — главный сервис-менеджер аудио.
-  - `Runtime/FMODEventContainer.cs` — обёртка над EventInstance с колбэками тайм-линии.
-  - `Runtime/FMODBus.cs` — обёртка над FMOD Bus.
-  - `Runtime/FMODAudioSettings.cs` — ScriptableObject с настройками.
-  - `Runtime/FMODBusVolumeSlider.cs` — привязка UI Slider к громкости шины.
-  - `Runtime/FMODAudioTester.cs` — тестовый компонент для проверки функций.
-  - `Runtime/FMODAudioBootstrapper.cs` — опциональный бутстраппер (можно отключить, если всё создаёт сервисная система).
+  - `Runtime/Core/FMODAudioManager.cs` — главный сервис-менеджер аудио.
+  - `Runtime/Core/FMODAudioSettingsAsset.cs` — глобальные настройки (жизненный цикл, флаги, ссылки на сервисы).
+  - `Runtime/Core/FMODBus.cs` — обёртка над FMOD Bus.
+  - `Runtime/Containers/FMODEventContainer.cs` — обёртка над EventInstance с колбэками тайм-линии.
+  - `Runtime/UI/FMODBusVolumeSlider.cs` — привязка UI Slider к громкости шины.
+  - `Runtime/Tests/FMODAudioTester.cs` — тестовый компонент.
+  - Сервисы и их активы настроек:
+    - `Runtime/Services/Buses/FmodBusService.cs` + `Runtime/Services/Buses/FMODBusServiceAsset.cs`
+    - `Runtime/Services/Events/FmodEventService.cs` + `Runtime/Services/Events/FMODEventServiceAsset.cs`
+    - `Runtime/Services/Music/FmodMusicService.cs` + `Runtime/Services/Music/FMODMusicServiceAsset.cs`
+    - `Runtime/Services/Parameters/FmodParameterService.cs` + `Runtime/Services/Parameters/FMODParameterServiceAsset.cs`
+    - `Runtime/Services/Banks/FmodBankService.cs` + `Runtime/Services/Banks/FMODBankServiceAsset.cs`
+    - `Runtime/Services/Snapshots/FmodSnapshotService.cs` + `Runtime/Services/Snapshots/FMODSnapshotServiceAsset.cs`
+    - `Runtime/Services/Tags/FmodTagService.cs` + `Runtime/Services/Tags/FMODTagServiceAsset.cs`
+  - Политики плейлистов:
+    - `Runtime/Policies/EventShuffle/EventShufflePolicyAsset.cs` — базовый тип активов политик.
+    - `Runtime/Policies/EventShuffle/FMODWeightedEventShufflePolicyAsset.cs` — взвешенное перемешивание.
+    - `Runtime/Policies/EventShuffle/FMODEventWeightsRegistryAsset.cs` — реестр весов.
 - Editor
-  - `Editor/FMODAudioSettingsEditor.cs` — доп. утилиты инспектора настроек.
-  - `Editor/FMODAudioTesterEditor.cs` — удобные кнопки для тестера.
+  - `Editor/FMODAudioSettingsEditor.cs` — утилиты инспектора настроек (кнопки быстрого создания сервисов).
+  - `Editor/FMODAudioTesterEditor.cs` — кнопки для тестера.
+  - `Editor/FMODTagServiceAssetEditor.cs` — удобный список шаблонов тегов.
+  - `Editor/FMODEventWeightsRegistryAssetEditor.cs` — удобный список весов событий.
+  - `Editor/FMODAudioTools.cs` — пункты меню для создания активов (Settings, Weights, Policy, Tag Service).
 
 ## Интеграция с сервисной системой проекта
 
@@ -27,13 +41,37 @@
 
 ## Настройки и ресурсы
 
-- Создайте `FMODAudioSettings` (меню Tools/Audio/FMOD/…) или вручную, и поместите в `Resources/Audio/FMOD/FMODAudioSettings.asset`.
-- В настройках:
-  - Раздел Buses — перечислите нужные шины (например, `bus:/`, `bus:/SFX`, `bus:/Music`).
-  - Preload Events — события для предзагрузки.
-  - Advanced: `MaxCachedEvents` — лимит кэша событий (LRU-эвикция), `StopAllOnSceneChange` — авто-стоп на смене сцены.
+- Создайте `FMODAudioSettingsAsset` (меню Tools/Audio/FMOD/…) или вручную. Актив содержит:
+  - Lifecycle: `DontDestroyOnLoad`.
+  - Advanced: `StopAllOnSceneChange`.
+  - Services: ссылки на активы сервисов (Music, Buses, Events, Parameters, Banks, Snapshots, Tags).
+- Путь загрузки по умолчанию: если компоненту `FMODAudioManager` не назначен актив настроек, он попытается загрузить
+  `Resources/Audio/FMOD/FMODAudioSettings`. Вы можете либо положить актив в эту папку, либо явно назначить ссылку в инспекторе.
 
-Примечание: менеджер в рантайме пытается загрузить настройки из `Resources/Audio/FMOD/FMODAudioSettings`.
+### Где теперь находятся «Buses» и «Preload Events»?
+
+- Конфигурация шин перенесена в `FMODBusServiceAsset`:
+  - Список `Buses` (путь шины, громкость по умолчанию, опциональный ключ PlayerPrefs),
+  - `PersistVolumes`, `VolumeKeyPrefix`.
+- Список предзагружаемых событий перенесён в `FMODEventServiceAsset`:
+  - `PreloadEvents` (необязательное имя + EventReference),
+  - `MaxCachedEvents` — лимит кэша контейнеров (LRU-эвикция).
+
+Назначьте соответствующие активы в `FMODAudioSettingsAsset.Services`.
+
+### Полезные параметры остальных сервисов
+
+- `FMODMusicServiceAsset`:
+  - `ShufflePolicyAsset` — актив политики перемешивания (например, взвешенной).
+  - Дефолты: `DefaultMusicFadeSeconds`, `DefaultPreDelaySeconds`, `DefaultPostDelaySeconds`, `DefaultShuffle`, `DefaultNoRepeatWindow`.
+- `FMODParameterServiceAsset`:
+  - Дефолты твинов параметров: `GlobalParameterEase`, `EventParameterEase`, `UseUnscaledTime`.
+- `FMODBankServiceAsset`:
+  - `DefaultLoadSampleData` и опциональный список `BanksToLoadOnBoot` (используйте по желанию в своём коде).
+- `FMODSnapshotServiceAsset`:
+  - Без параметров, предоставляет рантайм-сервис снапшотов.
+- `FMODTagServiceAsset`:
+  - `Templates` — список шаблонов тегов (EventReference + список тегов). Теги автоматически привязываются к контейнерам при старте.
 
 ## Базовые примеры использования
 
@@ -140,9 +178,9 @@ G.FMODAudioManager.UnloadBank("SFX");
 
 ## Миграция
 
-- Постепенно заменяйте старые вызовы Unity AudioSource или легаси-аудиосистемы на вызовы `G.FmodFMODAudio`.
-- Для UI громкости используйте `FMODBusVolumeSlider` вместо ручной логики.
-- Музыку переведите на `PlayMusic`/плейлист с кроссфейдом.
+- Если вы использовали старую версию, где в `FMODAudioSettings` были разделы «Buses» и «Preload Events»,
+  перенесите их в соответствующие активы: `FMODBusServiceAsset` (Buses) и `FMODEventServiceAsset` (PreloadEvents).
+- Остальной API менеджера остался совместим: Play/Stop/Parameters/Buses/Banks/Snapshots/Tags.
 
 ## Отладка
 
@@ -213,7 +251,7 @@ G.FMODAudioManager.UnloadBank("SFX");
 
 - __Не спамьте одноразовыми звуками.__ Используйте `PlayOneShotWithCooldown`.
 - __Ограничивайте конкуренцию лупов.__ `PlayIfUnderLimit(event, maxSimultaneous)`.
-- __Сохраняйте громкость шин.__ Перед изменением убедитесь, что `FMODAudioSettings` содержит запись для нужной шины (ключ для PlayerPrefs формируется оттуда).
+- __Сохраняйте громкость шин.__ Для персистентности используйте `FMODBusServiceAsset` (поля `Buses`, `PersistVolumes`, `VolumeKeyPrefix`).
 - __Проверяйте, что нужные банки загружены.__ Без них события могут не воспроизводиться.
 - __Именуйте параметры осмысленно.__ Это упрощает их использование с `SetGlobalParameter`/`RampParameter`.
 - __Используйте плейлисты-активы для контента.__ Это снижает правки кода и ускоряет итерации дизайнеров.

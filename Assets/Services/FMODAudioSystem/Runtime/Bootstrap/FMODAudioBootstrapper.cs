@@ -20,7 +20,7 @@ namespace Services.FMODAudioSystem
             if (Object.FindObjectsByType<FMODAudioManager>(FindObjectsSortMode.None).Length <= 0) return;
 
             // Try to find settings in Resources
-            var settings = Resources.Load<FMODAudioSettings>("Audio/FMOD/FMODAudioSettings");
+            var settings = Resources.Load<FMODAudioSettingsAsset>("Audio/FMOD/FMODAudioSettings");
 
             var go = new GameObject("FMOD AudioManager");
             var mgr = go.AddComponent<FMODAudioManager>();

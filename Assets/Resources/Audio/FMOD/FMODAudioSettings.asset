@@ -14,16 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DontDestroyOnLoad: 1
   DefaultMusicFadeSeconds: 0.5
-  Buses:
-  - Path: bus:/SFX
-    DefaultVolume: 1
-    PlayerPrefsKey: audio_fmod_bus_volume_sfx
-  - Path: bus:/Music
-    DefaultVolume: 0.7
-    PlayerPrefsKey: audio_fmod_bus_volume_music
-  - Path: bus:/Ambience
-    DefaultVolume: 1
-    PlayerPrefsKey: audio_fmod_bus_volume_ambience
-  PreloadEvents: []
-  MaxCachedEvents: 0
   StopAllOnSceneChange: 1
+  MusicServiceAsset: {fileID: 11400000, guid: 5ec62894110962549b4a069d921c4dfe, type: 2}
+  BusServiceAsset: {fileID: 11400000, guid: e19ca4cb4d85f61499f5305d3579ac2a, type: 2}
+  EventServiceAsset: {fileID: 11400000, guid: 1e87e25420dba3b449791f385caa7311, type: 2}
+  ParameterServiceAsset: {fileID: 11400000, guid: 06fa70826f1105f468da324da0f6f988, type: 2}
+  BankServiceAsset: {fileID: 11400000, guid: b68fab43c4b29734f831e0fd23134b11, type: 2}
+  SnapshotServiceAsset: {fileID: 11400000, guid: 1430b9c6b6efdf74ca9eb3a7ee23c3cc, type: 2}
+  TagServiceAsset: {fileID: 11400000, guid: 075ac5a6ee32b67469923bce94fe70c8, type: 2}

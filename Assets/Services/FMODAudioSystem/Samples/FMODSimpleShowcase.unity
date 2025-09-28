@@ -265,7 +265,7 @@ MonoBehaviour:
       Data3: -196211326
       Data4: -1116761096
     Path: event:/HipShop
-  AttachTarget: {fileID: 912332951}
+  AttachTarget: {fileID: 1866641775}
   OneShotWorldPos: {x: 0, y: 0, z: 0}
   OneShotCooldown: 0.1
   MusicEvent:
@@ -277,6 +277,7 @@ MonoBehaviour:
     Path: event:/HipShop
   Playlist: []
   MusicCrossfade: 0.5
+  PlaylistAsset: {fileID: 11400000, guid: de525cb31cfc6c94fa2ffae709300e51, type: 2}
   Snapshot:
     Guid:
       Data1: 0
@@ -287,7 +288,7 @@ MonoBehaviour:
   GlobalParameterName: 
   GlobalParameterTarget: 1
   GlobalParameterDuration: 0.5
-  EventParameterName: 
+  EventParameterName: Telephone
   EventParameterTarget: 1
   EventParameterDuration: 0.5
   BusPath: bus:/Music

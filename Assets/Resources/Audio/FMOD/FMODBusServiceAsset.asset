@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce858fc971ff0ed4a870ba23e3367296, type: 3}
+  m_Name: FMODBusServiceAsset
+  m_EditorClassIdentifier: 
+  Buses:
+  - Path: bus:/SFX
+    DefaultVolume: 1
+    PlayerPrefsKey: sfx
+  - Path: bus:/Music
+    DefaultVolume: 0.7
+    PlayerPrefsKey: music
+  - Path: bus:/Ambience
+    DefaultVolume: 1
+    PlayerPrefsKey: ambience
+  PersistVolumes: 1
+  VolumeKeyPrefix: 'FMODBusVolume::'
