@@ -1,4 +1,5 @@
 using UnityEngine;
+using Services.FMODAudioSystem;
 
 public static class G 
 {
@@ -6,6 +7,7 @@ public static class G
     public static AudioManager AudioManager;
     public static SceneLoader SceneLoader;
     public static GameState GameState;
+    public static FMODAudioManager FmodFMODAudio;
     
     //Объекты в игре
     public static GameMain Main;
@@ -35,6 +37,7 @@ public static class GameBootstrapper
         G.LocSystem = CreateSimpleService<LocSystem>();
         G.SceneLoader = CreateSimpleService<SceneLoader>();
         G.GameState = CreateSimpleService<GameState>();
+        G.FmodFMODAudio = CreateSimpleService<FMODAudioManager>();
     }
     private static T CreateSimpleService<T>() where T : Component, IService
     {

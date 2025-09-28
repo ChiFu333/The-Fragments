@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d1e19dc05b634fb014d7cee12501f, type: 3}
+  m_Name: NewFMODEventSequence
+  m_EditorClassIdentifier: 
+  Tracks:
+  - Guid:
+      Data1: -625326496
+      Data2: 1092249427
+      Data3: 1299351710
+      Data4: 648985877
+    Path: event:/Click
+  - Guid:
+      Data1: 1022973205
+      Data2: 1255464214
+      Data3: -1068928617
+      Data4: 1037280450
+    Path: event:/Clic05
+  - Guid:
+      Data1: -176413847
+      Data2: 1102404963
+      Data3: -2121762173
+      Data4: 252604208
+    Path: event:/Click_2
+  Loop: 1
+  CrossfadeSeconds: 0.5
