@@ -1,0 +1,62 @@
+{
+    "characters": [
+        "Name1",
+        "Name2"
+    ],
+    "dialogueRoutes": [
+    {
+        "name": "Name1",
+        "sentences": [
+            "Phrase1",
+            "Phrase2",
+            "Phrase3"
+        ]
+    },
+    {
+        "name": "Name2",
+        "sentences": [
+            "Phrase4",
+            "Phrase5",
+            "Phrase6"
+        ]
+    },
+    {
+        "name": "_Choices_",
+        "sentences": [
+            "Choice1",
+            "Choice2"
+        ]
+    },
+    {
+        "name": "Name2",
+        "sentences": [
+            "Choice1Phrase1",
+            "Choice1Phrase2",
+            "Choice1Phrase3"
+        ]
+    },
+    {
+        "name": "Name2",
+        "sentences": [
+            "Choice2Phrase1",
+            "Choice2Phrase2",
+            "Choice2Phrase3"
+        ]
+    },
+    {
+        "name": "Name1",
+        "sentences": [
+            "Phrase7",
+            "Phrase8",
+            "Phrase9"
+        ]
+    },
+    {
+        "name": "Name2",
+        "sentences": [
+            "Phrase10",
+            "Phrase11",
+            "Phrase12"
+        ]
+    }
+]}

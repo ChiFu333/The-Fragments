@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3464837706618326954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8338393772925610293}
+  - component: {fileID: 3213948861721810768}
+  m_Layer: 0
+  m_Name: IngaStanding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8338393772925610293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464837706618326954}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3213948861721810768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3464837706618326954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/Animations/IngaStanding
+  Components:
+  - rid: 3238232770330755146
+  references:
+    version: 2
+    RefIds:
+    - rid: 3238232770330755146
+      type: {class: TagAnimationData, ns: , asm: CMS}
+      data:
+        <framerate>k__BackingField: 10
+        <animationOffset>k__BackingField: {x: 0, y: 0}
+        <frames>k__BackingField:
+        - {fileID: 21300000, guid: 2674463175c001c439778d408ea5b454, type: 3}
+        - {fileID: 21300000, guid: 4b7b26d21cf929b4c8ed6599b1a7da71, type: 3}
+        - {fileID: 21300000, guid: e1135696d048e7b4bb6bf19e496d3f1a, type: 3}
+        - {fileID: 21300000, guid: 79be8861eb4c00249aa03d7c63cc7483, type: 3}
