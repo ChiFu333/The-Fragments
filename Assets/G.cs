@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Services.FMODAudioSystem;
 
-public static class G 
+public static class G
 {
+    public static List<Component> Services;
     public static LocSystem LocSystem;
     public static AudioManager AudioManager;
     public static SceneLoader SceneLoader;
@@ -10,6 +12,7 @@ public static class G
     public static FMODAudioManager FMODAudioManager;
     
     //Объекты в игре
+    public static DialogueSystem DialogueSystem;
     public static GameMain Main;
     public static TempleGameMain Adv_Main1;
 
@@ -19,7 +22,7 @@ public static class G
 public static class GameBootstrapper
 {
     private static bool _initialized = false;
-    private static GameObject serviceHolder;
+    public static GameObject serviceHolder;
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoad()
     {
@@ -32,26 +35,36 @@ public static class GameBootstrapper
         
         serviceHolder = new GameObject("===Services==="); 
         Object.DontDestroyOnLoad(serviceHolder);
+        G.Services = new List<Component>();
         
         G.AudioManager = CreateSimpleService<AudioManager>();
         G.LocSystem = CreateSimpleService<LocSystem>();
         G.SceneLoader = CreateSimpleService<SceneLoader>();
         G.GameState = CreateSimpleService<GameState>();
+        G.DialogueSystem = CreateSimpleService<DialogueSystem>();
         G.FMODAudioManager = CreateSimpleService<FMODAudioManager>();
+        
+        G.SceneLoader.StartFirstScene();
     }
     private static T CreateSimpleService<T>() where T : Component, IService
     {
         GameObject g = new GameObject(typeof(T).ToString());
         
-        g.transform.parent = serviceHolder.transform;
         T t = g.AddComponent<T>();
         t.Init();
+        G.Services.Add(t);
+        g.transform.parent = serviceHolder.transform;
         return g.GetComponent<T>();
     }
 }
 public interface IService
 {
     public void Init();
+}
+
+public interface INeedCameraForCanvas
+{
+    public void UpdateCanvasField(Camera c);
 }
 /*
  private GameObject CreateCanvas()

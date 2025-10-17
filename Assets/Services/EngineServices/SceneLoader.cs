@@ -18,22 +18,28 @@ public class SceneLoader : MonoBehaviour, IService
     {
         if(CMS.GetSingleComponent<ConfigMain>().showFading)
             CreateFadeCanvas();
-        
         currentSceneName = SceneManager.GetActiveScene().name;
+    }
+
+    public void StartFirstScene()
+    {
+        SetupCameraField();
         _ = Unfade(0.75f);
     }
     public async UniTask Load(string n, float fadeSpeed = 0.75f)
     {
         await Fade(fadeSpeed);
-        LoadScene(n);
+        await LoadScene(n);
+        SetupCameraField();
         await Unfade(fadeSpeed);
         //G.PausePanel.Init();
         //if(n == "MainMenu") G.AudioManager.PlayMusic(R.Audio.mainMenuMusic);
     }
-    private void LoadScene(string n)
+    private async UniTask LoadScene(string n)
     {
         if(currentSceneName == null) return;
-        SceneManager.LoadScene(n);
+        await SceneManager.LoadSceneAsync(n).ToUniTask();
+        await UniTask.Yield();
         currentSceneName = n;
     }
     private void CreateFadeCanvas()
@@ -57,6 +63,11 @@ public class SceneLoader : MonoBehaviour, IService
         fadeImage.GetComponent<RectTransform>().offsetMax = Vector2.zero; 
     }
 
+    private void SetupCameraField()
+    {
+        Camera c = FindFirstObjectByType<Camera>();
+        G.Services.OfType<INeedCameraForCanvas>().ToList().ForEach(x => x.UpdateCanvasField(c));
+    }
     private async UniTask Fade(float duration)
     {
         if (_fadeCanvas == null)

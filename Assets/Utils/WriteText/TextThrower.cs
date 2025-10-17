@@ -39,6 +39,11 @@ public class TextThrower : MonoBehaviour
         _token.Cancel();
         await UniTask.Delay(1000);
     }
+
+    public void CleanText()
+    {
+        _textAnimator.ShowText("");
+    }
     private async UniTask PlayTypingSoundRepeatedly(int intervalMs, CancellationToken cancellationToken, AudioClip sample)
     {
         while (!cancellationToken.IsCancellationRequested)

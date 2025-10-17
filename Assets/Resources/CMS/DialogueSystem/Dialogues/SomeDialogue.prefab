@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6012973102711863692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239019578965965630}
+  - component: {fileID: 6003163496738018456}
+  m_Layer: 0
+  m_Name: SomeDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239019578965965630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012973102711863692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6003163496738018456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012973102711863692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1729a46f79086449a991b5512530e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idCMS: CMS/DialogueSystem/Dialogues/SomeDialogue
+  Components:
+  - rid: 2716293279548178511
+  references:
+    version: 2
+    RefIds:
+    - rid: 2716293279548178511
+      type: {class: TagDialogue, ns: , asm: Assembly-CSharp}
+      data:
+        LeftActor: {fileID: 7097787934310771982, guid: 5e759a094f48e8745a18c8fae68b51d8, type: 3}
+        RightActor: {fileID: 6003163496738018456, guid: d27976a3e19d1964b9c03a4d08b86c65, type: 3}
+        scenario:
+        - isLeftActorSpeak: 1
+          spriteType: 1
+          textLine:
+            en: 
+            ru: "\u0418\u043D\u0433\u0430, \u0443 \u0442\u0435\u0431\u044F \u0432\u0435\u0441\u044C
+              \u0441\u0432\u0438\u0442\u043E\u0440 \u043C\u044F\u0442\u044B\u0439!\\n
+              \u041D\u0435 \u043F\u043E\u0437\u043E\u0440\u044C \u043C\u0430\u0442\u044C!"
+        - isLeftActorSpeak: 0
+          spriteType: 1
+          textLine:
+            en: 
+            ru: "\u041F\u0440\u043E\u0441\u0442\u0438... \u044F \u043F\u043E\u0433\u043B\u0430\u0436\u0443
+              \u0435\u0433\u043E."

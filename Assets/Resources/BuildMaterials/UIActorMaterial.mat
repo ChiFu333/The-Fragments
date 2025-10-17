@@ -7,15 +7,18 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MaterialUILit
+  m_Name: UIActorMaterial
   m_Shader: {fileID: 4800000, guid: 79ee6cefbc672a44e97359d4d14ea301, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - DOODLE_ON
   - GLOWLIGHT_ON
+  - GREYSCALEOUTLINE_ON
+  - GREYSCALE_ON
   m_InvalidKeywords:
   - _GLOWAFFECTLIGHT_ON
+  - _GREYSCALEOUTLINE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -161,9 +164,9 @@ Material:
     - _GrassRadialBend: 0.1
     - _GrassSpeed: 2
     - _GrassWind: 20
-    - _GreyscaleBlend: 1
+    - _GreyscaleBlend: 0
     - _GreyscaleLuminosity: 0
-    - _GreyscaleOutline: 0
+    - _GreyscaleOutline: 1
     - _HandDrawnAmount: 4
     - _HandDrawnSpeed: 1
     - _HitEffectBlend: 1
