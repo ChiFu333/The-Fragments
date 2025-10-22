@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class SlotClass
 {
-    [SerializeField] private ItemClass item;
+    [SerializeField] private TagInventoryItem item;
     [SerializeField] private int quantity;
 
     public SlotClass()
@@ -12,13 +12,13 @@ public class SlotClass
         item = null;
         quantity = 0;
     }
-    public SlotClass(ItemClass _item, int _quantity)
+    public SlotClass(TagInventoryItem _item, int _quantity)
     {
         item = _item;
         quantity = _quantity;
     }
 
-    public ItemClass GetItem() { return item; }
+    public TagInventoryItem GetItem() { return item; }
     public int GetQuantity() { return quantity; }
     public void AddQuantity(int _guantity) { quantity += _guantity; }
     public void SubQuantity(int _guantity) { quantity -= _guantity; }

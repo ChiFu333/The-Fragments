@@ -13,6 +13,7 @@ public static class G
     
     //Объекты в игре
     public static DialogueSystem DialogueSystem;
+    public static Inventory Inventory;
     public static GameMain Main;
     public static TempleGameMain Adv_Main1;
 
@@ -42,6 +43,7 @@ public static class GameBootstrapper
         G.SceneLoader = CreateSimpleService<SceneLoader>();
         G.GameState = CreateSimpleService<GameState>();
         G.DialogueSystem = CreateSimpleService<DialogueSystem>();
+        G.Inventory = CreateSimpleService<Inventory>();
         G.FMODAudioManager = CreateSimpleService<FMODAudioManager>();
         
         G.SceneLoader.StartFirstScene();
