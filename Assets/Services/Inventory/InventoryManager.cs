@@ -34,7 +34,9 @@ public class InventoryManager : MonoBehaviour
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].GetItem().itemIcon;
-                slots[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = items[i].GetQuantity().ToString();
+                if (items[i].GetItem().isStackable)
+                    slots[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = items[i].GetQuantity().ToString();
+                else slots[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
             }
             catch
             {

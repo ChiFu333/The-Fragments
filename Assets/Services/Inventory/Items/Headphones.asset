@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Headphones
   itemIcon: {fileID: 6437564105541445403, guid: f45c2135743bd3142b913b447436a549, type: 3}
+  isStackable: 0
